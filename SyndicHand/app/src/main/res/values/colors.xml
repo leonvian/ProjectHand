@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#fff</color>
+    <color name="list_item_title">#fff</color>
+    <color name="list_background">#FFCC80</color>
+
+    <color name="list_background_pressed">#2196F3</color>
+
+    <color name="list_divider">#272727</color>
+    <color name="counter_text_bg">#626262</color>
+    <color name="counter_text_color">#c5c4c4</color>
+    <color name="gray_background">#E0E0E0</color>
+
+
+    <color name="text_model_name_color">#494949</color>
+    <color name="text_instance_color">#424242</color>
+    <color name="text_instance_info_color">#5c5c5c</color>
+
+    <color name="colorAccentDark">#BF360C</color>
+    <color name="colorAccentLight">#FF5722</color>
+
+    <color name="ColorPrimary">#2196f3</color>
+    <color name="ColorPrimaryDark">#1976d2</color>
+
+    <color name="model_item_color">#7986CB</color>
+    <color name="edit_text_alpha54">#8C7986CB</color>
+
+    <color name="status_bar_color">#303F9F</color>
+    <color name="app_bar_color">#2196f3</color>
+    <color name="item_selected">#dfdfdf</color>
+    <color name="app_bar_text_color">#fff</color>
+    <color name="background">#fff</color>
+
+    <color name="dialog_title_color">#424242</color>
+    <color name="dialog_content_color">#626262</color>
+    <color name="dialog_background_color">#fff</color>
+    <color name="dialog_button_text_color">#2196f3</color>
+
+    <color name="card_background">#fafafa</color>
+    <color name="card_instance_background">#efefef</color>
+    <color name="instance_border">#cbcbcb</color>
+
+    <color name="met_textColorHint">#bbbbbb</color>
+    <color name="met_baseColor">#2196f3</color>
+    <color name="met_primaryColor">#2196f3</color>
+    <color name="met_underlineColor">#bbbbbb</color>
+    <color name="met_errorColor">#DD2C00</color>
+
+    <color name="defaultBackgroundColor">#fafafa</color>
+    <color name="defaultTextColor">#a1a1a1</color>
+
+</resources>

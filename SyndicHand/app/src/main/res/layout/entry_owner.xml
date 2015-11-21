@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/defaultBackgroundColor"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app_bar_color"
+        android:elevation="4dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.GridLayout
+                    android:id="@+id/GridLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:columnCount="2">
+
+                    <!-- row 0 -->
+                    <ImageView
+                        android:layout_marginRight="8dp"
+                        style="@style/DefaultImageViewGrid"
+                        android:src="@drawable/ic_person_black_48dp"
+                        app:layout_column="0"
+                        app:layout_gravity="center"
+                        app:layout_row="0" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_column="1"
+                        app:layout_row="0">
+
+                        <EditText
+                            android:id="@+id/edit_text_name"
+                            style="@style/DefaultEditText"
+                            android:hint="@string/responsable_name"
+                            android:inputType="text" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_column="1"
+                        app:layout_row="1">
+
+                        <EditText
+                            android:id="@+id/edit_text_apartament_number"
+                            style="@style/DefaultEditText"
+                            android:hint="@string/apartament_number"
+                            android:inputType="text|number" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <!-- row 1 -->
+
+                    <ImageView
+                        android:layout_marginRight="8dp"
+                        style="@style/DefaultImageViewGrid"
+                        android:src="@drawable/ic_email_black_48dp"
+                        app:layout_column="0"
+                        app:layout_gravity="center"
+                        app:layout_row="2" />
+
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_column="1"
+                        app:layout_row="2">
+
+                        <EditText
+                            android:id="@+id/edit_text_email"
+                            style="@style/DefaultEditText"
+                            android:hint="@string/email"
+                            android:inputType="textEmailAddress" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+
+                    <!-- row 2 -->
+                    <ImageView
+                        android:layout_marginRight="8dp"
+                        style="@style/DefaultImageViewGrid"
+                        android:src="@drawable/ic_call_black_48dp"
+                        app:layout_column="0"
+                        app:layout_gravity="center"
+                        app:layout_row="3" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_row="3">
+
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/edit_text_ddd"
+                                style="@style/DefaultEditText"
+                                android:layout_width="50dp"
+                                android:hint="@string/ddd"
+                                android:inputType="phone" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <EditText
+                                android:id="@+id/edit_text_phone"
+                                style="@style/DefaultEditText"
+                                android:hint="@string/phone"
+                                android:inputType="phone" />
+
+                        </android.support.design.widget.TextInputLayout>
+
+                    </LinearLayout>
+
+
+
+                </android.support.v7.widget.GridLayout>
+
+                <CheckBox
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/checkbox_syndic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/is_syndic"
+                    android:textColor="@color/defaultTextColor" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_rent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/is_rent"
+                    android:textColor="@color/defaultTextColor" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_audit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/is_audit_committee"
+                    android:textColor="@color/defaultTextColor" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_pet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/has_pet"
+                    android:textColor="@color/defaultTextColor" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            style="@style/DefaultFab"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_add_white" />
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/defaultBackgroundColor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:elevation="4dp"
+            android:id="@+id/viewA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/app_bar_color"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/tool_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/app_bar_color"
+                 />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="62dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_marginBottom="8dp"
+                    android:id="@+id/text_view_name"
+                    style="@style/DefaultTextView"
+                    android:text="Leonardo Viana"
+                    android:textColor="@android:color/white"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_marginBottom="16dp"
+                    android:id="@+id/text_view_apartament_number"
+                    style="@style/DefaultTextView"
+                    android:text="222"
+                    android:textColor="@android:color/white"
+                    android:textSize="22sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="16dp"
+            android:id="@+id/viewB"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/item_reads_status_owner" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"/>
+
+            <include layout="@layout/item_detail_dwellers" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"/>
+
+            <include layout="@layout/item_detail_vehicle" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"/>
+
+            <include layout="@layout/item_historic" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        app:layout_anchorGravity="bottom|right|end"
+        android:id="@+id/fab"
+        style="@style/DefaultFab"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_create_white_24dp"
+        app:layout_anchor="@id/viewA" />
+
+
+</android.support.design.widget.CoordinatorLayout>

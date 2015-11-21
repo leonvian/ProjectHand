@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ColorPrimary"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/viewA"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:background="@color/ColorPrimary"
+            android:orientation="vertical">
+
+
+            <android.support.v7.widget.Toolbar
+                android:layout_alignParentTop="true"
+                android:id="@+id/tool_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/app_bar_color"
+                />
+
+            <TextView
+                android:layout_alignParentBottom="true"
+                android:layout_margin="32dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/loggin_in"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_view_size_default" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:background="@color/defaultBackgroundColor"
+            android:id="@+id/viewB"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:orientation="vertical">
+
+
+                <android.support.design.widget.TextInputLayout
+                    style="@style/TextInputLayout">
+
+                    <EditText
+                        android:id="@+id/edit_text_login"
+                        style="@style/DefaultEditText"
+                        android:hint="@string/user_name"
+                        android:inputType="text" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                   style="@style/TextInputLayout">
+
+                    <EditText
+                        android:id="@+id/edit_text_password"
+                        style="@style/DefaultEditText"
+                        android:hint="@string/password"
+                        android:inputType="textPassword" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <Button
+                    android:id="@+id/button_signup"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:layout_gravity="left"
+                    android:padding="10dp"
+                    style="@style/SecundaryButton"
+                    android:text="@string/entry_new_user"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        style="@style/DefaultFab"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:src="@drawable/ic_done_white"
+        app:layout_anchor="@id/viewA"
+        app:layout_anchorGravity="bottom|right|end" />
+
+</android.support.design.widget.CoordinatorLayout>
+

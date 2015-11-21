@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".OwnersList">
+
+    <item
+        android:id="@+id/action_change_style"
+        android:title="@string/change_style"
+        app:showAsAction="always"
+        android:icon="@drawable/abc_ic_menu_copy_mtrl_am_alpha"/>
+
+</menu>

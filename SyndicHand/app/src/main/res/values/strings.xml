@@ -1,0 +1,115 @@
+<resources>
+    <string name="app_name">Syndic Hand</string>
+    <string name="app_name_short">Hand</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="owner">Unidade</string>
+    <string name="open">Aberto</string>
+    <string name="close">Fechado</string>
+    <string name="change_style">Mudança de estilo</string>
+
+
+    <string name="apartament_number">Número do Apartamento</string>
+    <string name="name">Nome Completo</string>
+    <string name="user_name">Login</string>
+    <string name="block_id">Bloco</string>
+    <string name="email">E-mail</string>
+
+    <string name="ddd">DDD</string>
+    <string name="phone">Telefone</string>
+
+    <string name="is_rent">Este apartamento é alugado?</string>
+    <string name="has_pet">Possui animal de estimação?</string>
+    <string name="syndic">Síndico</string>
+    <string name="is_syndic">É síndico?</string>
+    <string name="is_audit_committee">É do conselho fiscal?</string>
+    <string name="current_gas_register">Registro de gás</string>
+    <string name="current_coldWater_register">Registro de água fria</string>
+    <string name="current_hotWater_register">Registro de água quente</string>
+    <string name="this_field_is_obrigatory">Este campo é obrigatório</string>
+    <string name="unexpected_value">Campo preenchido com valor inadequado.</string>
+    <string name="read_title">Leituras</string>
+    <string name="ok">Ok</string>
+    <string name="owner_created_want_make_first_read">Condômino recém criado. Deseja realizar a primeira leitura?</string>
+
+    <string name="current_register">Leitura Atual</string>
+    <string name="old_register">Leitura Anterior</string>
+
+    <string name="status_of_reads">Situação das leituras</string>
+    <string name="entry_here_reads">Cadastre aqui o consumo de água, luz e gás.</string>
+
+    <string name="statics_of_reads">Estatísticas de consumo</string>
+    <string name="statics_of_reads_description">Estatísticas de consumo</string>
+
+    <string name="save">Salvar</string>
+
+    <string name="pending_reads_alert_message">Leituras pendentes</string>
+
+    <string name="max_people">Máximo de Pessoas</string>
+    <string name="reservations">Reservas</string>
+    <string name="allow_reservations">Permite Reservas</string>
+    <string name="Wortime">Horário de funcionamento</string>
+    <string name="worktime_begin">Começa</string>
+    <string name="worktime_end">Termina</string>
+    <string name="reservation_cost">Custo de reserva</string>
+    <string name="observation">Observação</string>
+    <string name="common_area">Área Comum</string>
+    <string name="common_areas">Áreas Comuns</string>
+
+    <string name="entry_dwellers">Cadastro de Moradores</string>
+    <string name="entry_dwellers_detail">Cadastre aqui os moradores das unidades</string>
+
+    <string name="entry_vehicles">Cadastro de Veículos</string>
+    <string name="entry_vehicles_detail">Cadastre aqui os veículos das unidades</string>
+
+    <string name="historic">Histórico</string>
+    <string name="consuption_historic">Acompanhe o histório de consumo desta unidade</string>
+    <string name="fail_save_online">Falha ao salvar online. Verifique a sua conexão e tente novamente.</string>
+    <string name="address">Endereço</string>
+    <string name="cep">CEP</string>
+
+    <string name="hot_water">Água quente</string>
+    <string name="cold_water">Água fria</string>
+    <string name="gas">Gás</string>
+
+    <string name="condominium">Condomínio</string>
+    <string name="loader">Carregando</string>
+    <string name="save_sucess">Salvo com sucesso.</string>
+    <string name="block">Bloco</string>
+    <string name="blocks">Blocos</string>
+    <string name="consume_entry">Cadastro Consumo</string>
+    <string name="consume_condominium">Consumo Condomínio</string>
+    <string name="its_necessary_create_a_condominium_to_proceed">É necessário cadastrar um condomínio para realizar essa ação.</string>
+
+    <string name="welcome_to_syndic_hand">Bem vindo ao Syndic Hand</string>
+    <string name="first_thing_to_do_is">A primeira coisa a fazer agora é cadastrar o seu condomínio no sistema. Clique no botão abaixo para cadastrar.</string>
+    <string name="already_entried">Condomínio já cadastrado...</string>
+    <string name="if_you_already_entry_condominium_please_enter_with_condominium_code">Se você já cadastrou um condomínio anteriormente, entre com o código dele abaixo:</string>
+    <string name="entry">Cadastrar</string>
+    <string name="enter">Entrar</string>
+    <string name="condominium_code">Código do condomínio</string>
+    <string name="password">Senha</string>
+    <string name="connection_problem_to_get_condominium_online">Não foi possível recuperar esse condomínio. Verifique o código e a sua conexão e tente novamente.</string>
+    <string name="transition_view">Transition_view</string>
+    <string name="entry_your_self">Cadastre-se</string>
+    <string name="loggin_in">Entre com os seus dados</string>
+    <string name="valid_your_email_and_try_again">Valide o seu e-mail e tente novamente.</string>
+    <string name="fail_to_login_check_your_connection_and_try_again">Falha ao entrar na aplicação, verifique a sua conexão e tente novamente.</string>
+    <string name="entry_new_user">Me cadastrar</string>
+    <string name="responsable_name">Nome do Responsável</string>
+    <string name="user_not_found">Usuário não encontrado.</string>
+    <string name="fail_to_entry_user">Falha ao cadastrar usuário.</string>
+
+    <string name="no_unities_found">Nenhuma unidade foi encontrada</string>
+    <string name="necessary_syndic_validation">É necessário a aprovação do síndico</string>
+
+    <string name="now_you_can_entry_the_unities">Agora você pode cadastrar as unidades deste prédio. Também existe a opção do morador se cadastrar através do aplicativo do condômino.</string>
+
+    <string name="common_area_name">Nome área comun</string>
+    <string name="common_area_save_sucesss">Área comun salva com sucesso.</string>
+
+    <string name="confirm_your_email_to_login">Agora confirme o seu e-mail e entre no sistema.</string>
+
+</resources>
