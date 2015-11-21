@@ -427,6 +427,7 @@ public class OwnerList extends SyndicHandActivity implements OnDataSelected {
 
             switch (requestCode) {
                 case REQUEST_CODE_ATUALIZE_LIST:
+                    enableListLayoutIfNecessary();
                     Unity owner = (Unity) data.getExtras().getSerializable(Unity.class.getSimpleName());
                     if(unities.contains(owner)) {
                         int index = unities.indexOf(owner);
@@ -445,6 +446,13 @@ public class OwnerList extends SyndicHandActivity implements OnDataSelected {
                     loadUnitiesIfHasCondominiumEntried();
                     break;
             }
+        }
+    }
+
+    private void enableListLayoutIfNecessary() {
+        if(layoutListUnitys.getVisibility() != View.VISIBLE) {
+            layoutInstructionNoUnities.setVisibility(View.GONE);
+            layoutListUnitys.setVisibility(View.VISIBLE);
         }
     }
 

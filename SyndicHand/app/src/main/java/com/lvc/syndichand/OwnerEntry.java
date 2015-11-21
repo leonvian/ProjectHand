@@ -53,6 +53,7 @@ public class OwnerEntry extends SyndicHandActivity {
             @Override
             public void onClick(View v) {
                 if (isObrigatoryFieldsOk()) {
+                    showProgressDialog();
                     Unity unity = loadOwnerByFields();
                     unity.save();
                     saveOnline(unity);
@@ -84,10 +85,12 @@ public class OwnerEntry extends SyndicHandActivity {
                     unity.setParseIdentifier(webId);
                     unity.save();
                     Toast.makeText(OwnerEntry.this, R.string.save_sucess, Toast.LENGTH_LONG).show();
+                    dismissProgressDialog();
                     finishWithResult(unity);
                 } else {
                     e.printStackTrace();
                     unity.delete();
+                    dismissProgressDialog();
                     Toast.makeText(OwnerEntry.this, R.string.fail_save_online, Toast.LENGTH_LONG).show();
                 }
             }
