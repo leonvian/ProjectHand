@@ -154,8 +154,8 @@ public class CommonArea extends Model implements ParseData, Serializable {
         condominiumParseIdentifier = parseObject.getString(CONDOMINIUM_ID_KEY);
         name = parseObject.getString(NAME_KEY);
         maxPeople = parseObject.getInt(MAX_PEOPLE_KEY);
-        workTimeBegin  = parseObject.getString(CONDOMINIUM_ID_KEY);
-        workTimeEnd = parseObject.getString(CONDOMINIUM_ID_KEY);
+        workTimeBegin  = parseObject.getString(WORK_TIME_BEGIN_KEY);
+        workTimeEnd = parseObject.getString(WORK_TIME_END_KEY);
 
         scheduleCost = parseObject.getString(SCHEDULE_COST_KEY);
         observation = parseObject.getString(OBSERVATION_KEY);

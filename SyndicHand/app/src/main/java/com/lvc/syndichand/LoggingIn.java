@@ -52,11 +52,13 @@ public class LoggingIn extends SyndicHandActivity {
 
 
         ParseUser parseUser = ParseUser.getCurrentUser();
-        if(parseUser != null && isEmailVerified(parseUser)) {
-            goToNextScreen(OwnerList.class);
-            finish();
-        } else {
-            showMessageToast(getString(R.string.confirm_your_email_to_login));
+        if(parseUser != null) {
+            if(isEmailVerified(parseUser)) {
+                goToNextScreen(OwnerList.class);
+                finish();
+            } else {
+                showMessageToast(getString(R.string.confirm_your_email_to_login));
+            }
         }
     }
 

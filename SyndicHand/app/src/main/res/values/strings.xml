@@ -67,7 +67,9 @@
     <string name="historic">Histórico</string>
     <string name="consuption_historic">Acompanhe o histório de consumo desta unidade</string>
     <string name="fail_save_online">Falha ao salvar online. Verifique a sua conexão e tente novamente.</string>
-    <string name="address">Endereço</string>
+    <string name="address">Logradouro</string>
+    <string name="number">Número</string>
+    <string name="complement">Complemento</string>
     <string name="cep">CEP</string>
 
     <string name="hot_water">Água quente</string>
@@ -84,7 +86,7 @@
     <string name="its_necessary_create_a_condominium_to_proceed">É necessário cadastrar um condomínio para realizar essa ação.</string>
 
     <string name="welcome_to_syndic_hand">Bem vindo ao Syndic Hand</string>
-    <string name="first_thing_to_do_is">A primeira coisa a fazer agora é cadastrar o seu condomínio no sistema. Clique no botão abaixo para cadastrar.</string>
+    <string name="first_thing_to_do_is">A primeira coisa a se fazer agora é cadastrar o seu condomínio no sistema. Clique no botão abaixo para cadastrar.</string>
     <string name="already_entried">Condomínio já cadastrado...</string>
     <string name="if_you_already_entry_condominium_please_enter_with_condominium_code">Se você já cadastrou um condomínio anteriormente, entre com o código dele abaixo:</string>
     <string name="entry">Cadastrar</string>
@@ -108,6 +110,9 @@
     <string name="now_you_can_entry_the_unities">Agora você pode cadastrar as unidades deste prédio. Também existe a opção do morador se cadastrar através do aplicativo do condômino.</string>
 
     <string name="common_area_name">Nome área comun</string>
+
+    <string name="condominium_name">Nome do condomínio</string>
+
     <string name="common_area_save_sucesss">Área comun salva com sucesso.</string>
 
     <string name="confirm_your_email_to_login">Agora confirme o seu e-mail e entre no sistema.</string>

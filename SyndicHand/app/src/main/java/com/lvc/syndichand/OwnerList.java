@@ -84,7 +84,7 @@ public class OwnerList extends SyndicHandActivity implements OnDataSelected {
         findViewById(R.id.button_entry_condominium).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToNextScreen(CondominiumEntry.class);
+                goToNextScreen(CondominiumEntry.class,REQUEST_CODE_CONDOMINIUM_INFO);
             }
         });
 

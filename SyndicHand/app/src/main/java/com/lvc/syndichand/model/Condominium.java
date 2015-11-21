@@ -19,6 +19,9 @@ public class Condominium extends Model implements Serializable, ParseData {
     private String name;
 
     @Column
+    private String number;
+
+    @Column
     private String observation;
 
     @Column
@@ -48,6 +51,14 @@ public class Condominium extends Model implements Serializable, ParseData {
         this.coldWater = coldWater;
         this.gas = gas;
         this.observation = observation;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public String getObservation() {
@@ -130,10 +141,11 @@ public class Condominium extends Model implements Serializable, ParseData {
         parseObject.put("Name", getName());
         parseObject.put("Observation", getObservation());
         parseObject.put("Address", getAddress());
+        parseObject.put("Number", getNumber());
         parseObject.put("CEP", getCep());
-        parseObject.put("hotwater", isHotWater());
-        parseObject.put("coldwater", isColdWater());
-        parseObject.put("gas", isGas());
+        parseObject.put("Hotwater", isHotWater());
+        parseObject.put("Coldwater", isColdWater());
+        parseObject.put("Gas", isGas());
     }
 
     @Override
@@ -147,12 +159,13 @@ public class Condominium extends Model implements Serializable, ParseData {
     @Override
     public void toObject(ParseObject parseObject) {
         setName(parseObject.getString("Name"));
-        setObservation(parseObject.getString("Observation"));
+        setObservation(parseObject.getString("Complement"));
         setAddress(parseObject.getString("Address"));
+        setNumber(parseObject.getString("Number"));
         setCep(parseObject.getString("CEP"));
-        setHotWater(parseObject.getBoolean("hotwater"));
-        setColdWater(parseObject.getBoolean("coldwater"));
-        setGas(parseObject.getBoolean("gas"));
+        setHotWater(parseObject.getBoolean("Hotwater"));
+        setColdWater(parseObject.getBoolean("Coldwater"));
+        setGas(parseObject.getBoolean("Gas"));
         String objectID = parseObject.getObjectId();
         setParseIdentifier(objectID);
     }

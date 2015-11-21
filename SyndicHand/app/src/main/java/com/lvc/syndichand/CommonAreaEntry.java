@@ -48,6 +48,7 @@ public class CommonAreaEntry extends SyndicHandActivity {
                     return;
                 }
 
+                showProgressDialog();
                 String name = editTextName.getText().toString();
                 int maxPeople = getIntValueOnEditText(editTextMaxPeople);
                 String workTimeBegin = editTextWorkTimeBegin.getText().toString();
@@ -95,16 +96,20 @@ public class CommonAreaEntry extends SyndicHandActivity {
                 if (e == null) {
                     commonArea.setParseIdentifier(webId);
                     commonArea.save();
+
+                    dismissProgressDialog();
+                    Toast.makeText(CommonAreaEntry.this, R.string.common_area_save_sucesss, Toast.LENGTH_LONG).show();
+
                     Intent intent = new Intent();
                     Bundle extras = new Bundle();
                     extras.putSerializable(CommonArea.class.getSimpleName(), commonArea);
                     intent.putExtras(extras);
                     setResult(RESULT_OK, intent);
-                    Toast.makeText(CommonAreaEntry.this, R.string.common_area_save_sucesss, Toast.LENGTH_LONG).show();
                     finish();
                 } else {
                     commonArea.delete();
                     Toast.makeText(CommonAreaEntry.this, R.string.fail_save_online, Toast.LENGTH_LONG).show();
+                    dismissProgressDialog();
                 }
             }
 

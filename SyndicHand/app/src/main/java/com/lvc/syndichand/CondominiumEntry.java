@@ -21,6 +21,7 @@ public class CondominiumEntry extends SyndicHandActivity {
 
     private EditText editTextName;
     private EditText editTextAddress;
+    private EditText editTextNumber;
     private EditText editTextCEP;
     private EditText editTextObservation;
     private CheckBox checkBoxColdwater;
@@ -35,6 +36,7 @@ public class CondominiumEntry extends SyndicHandActivity {
 
         prepareActionBarToBack(getString(R.string.condominium));
 
+        editTextNumber  = (EditText) findViewById(R.id.edit_text_number);
         editTextName = (EditText) findViewById(R.id.edit_text_name);
         editTextAddress = (EditText) findViewById(R.id.edit_text_address);
         editTextCEP = (EditText) findViewById(R.id.edit_text_cep);
@@ -53,6 +55,7 @@ public class CondominiumEntry extends SyndicHandActivity {
                     return;
                 }
 
+                showProgressDialog();
                 loadDataFromUIFields();
                 condominium.save();
                 saveOnline(condominium);
@@ -63,6 +66,7 @@ public class CondominiumEntry extends SyndicHandActivity {
     private void loadDataFromUIFields() {
         String name = editTextName.getText().toString();
         String address = editTextAddress.getText().toString();
+        String number = editTextNumber.getText().toString();
         String cep = editTextCEP.getText().toString();
         String observation = editTextObservation.getText().toString();
 
@@ -72,6 +76,7 @@ public class CondominiumEntry extends SyndicHandActivity {
 
         condominium.setName(name);
         condominium.setAddress(address);
+        condominium.setNumber(number);
         condominium.setCep(cep);
         condominium.setObservation(observation);
         condominium.setHotWater(hotWater);
@@ -98,6 +103,7 @@ public class CondominiumEntry extends SyndicHandActivity {
     private void loadCondominiumData() {
         editTextName.setText(condominium.getName());
         editTextAddress.setText(condominium.getAddress());
+        editTextNumber.setText(condominium.getNumber());
         editTextObservation.setText(condominium.getObservation());
         editTextCEP.setText(condominium.getCep());
         checkBoxColdwater.setChecked(condominium.isColdWater());
@@ -106,18 +112,21 @@ public class CondominiumEntry extends SyndicHandActivity {
     }
 
     private void saveOnline(final Condominium condominium) {
-        showProgressDialog();
         WebFacade.saveOrUpdateData(condominium, new WebFacade.WebCallback() {
 
             @Override
             public void onWorkDone(String webId, Exception e) {
-                dismissProgressDialog();
+
                 if (e == null) {
                     condominium.setParseIdentifier(webId);
                     condominium.save();
                     saveUserWithcCondominiumID(webId);
+
+                    dismissProgressDialog();
                 } else {
                     condominium.delete();
+
+                    dismissProgressDialog();
                     Toast.makeText(CondominiumEntry.this, R.string.fail_save_online, Toast.LENGTH_LONG).show();
                 }
             }

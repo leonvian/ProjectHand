@@ -31,20 +31,18 @@
                 android:orientation="vertical">
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    style="@style/TextInputLayout">
 
                     <EditText
                         android:id="@+id/edit_text_name"
                         style="@style/DefaultEditText"
-                        android:hint="@string/name"
+                        android:hint="@string/condominium_name"
                         android:inputType="text" />
 
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/TextInputLayout"
                     app:layout_column="1"
                     app:layout_row="1">
 
@@ -56,10 +54,22 @@
 
                 </android.support.design.widget.TextInputLayout>
 
+                <android.support.design.widget.TextInputLayout
+                    style="@style/TextInputLayout"
+                    app:layout_column="1"
+                    app:layout_row="1">
+
+                    <EditText
+                        android:id="@+id/edit_text_number"
+                        style="@style/DefaultEditText"
+                        android:hint="@string/number"
+                        android:inputType="number" />
+
+                </android.support.design.widget.TextInputLayout>
+
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    style="@style/TextInputLayout">
 
                     <EditText
                         android:id="@+id/edit_text_cep"
@@ -94,13 +104,12 @@
                     android:textColor="@color/defaultTextColor" />
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    style="@style/TextInputLayout">
 
                     <EditText
                         android:id="@+id/edit_text_observation"
                         style="@style/DefaultEditText"
-                        android:hint="@string/observation"
+                        android:hint="@string/complement"
                         android:inputType="text" />
 
                 </android.support.design.widget.TextInputLayout>
