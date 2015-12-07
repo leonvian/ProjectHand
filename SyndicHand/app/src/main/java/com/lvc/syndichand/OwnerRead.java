@@ -95,16 +95,17 @@ public class OwnerRead extends SyndicHandActivity {
 
     private void loadOldRegisters() {
         showProgressDialog();
-        WebFacade.loadOldRegister(new WebFacade.QueryWebCallback<Register>() {
+        String unityId = unity.getParseUniqueID();
+        WebFacade.loadOldRegister(unityId, new WebFacade.QueryWebCallback<Register>() {
             @Override
             public void onQueryResult(List<Register> data, Exception e) {
                 if(e == null) {
                     treatOldRegisters(data);
-                    dismissProgressDialog();
                 } else {
                     showMessageToast(getString(R.string.fail_to_retrieve_data));
-                    dismissProgressDialog();
                 }
+
+                dismissProgressDialog();
             }
         });
     }
