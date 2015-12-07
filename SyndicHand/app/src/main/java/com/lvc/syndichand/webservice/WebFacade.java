@@ -10,6 +10,7 @@ import com.lvc.syndichand.model.ParseData;
 import com.lvc.syndichand.model.Register;
 import com.lvc.syndichand.model.Unity;
 import com.lvc.syndichand.model.Vehicle;
+import com.parse.CountCallback;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -32,6 +33,14 @@ public class WebFacade {
     }
 
     public static void loadRegister(String unityID, final QueryWebCallback<Register> queryWebCallback) {
+        loadRegister(unityID, queryWebCallback, null);
+    }
+
+    public static void loadRegister(String unityID, final CountCallback countCallback) {
+        loadRegister(unityID, null, countCallback);
+    }
+
+    private static void loadRegister(String unityID, final QueryWebCallback<Register> queryWebCallback, CountCallback countCallback) {
         Calendar calendar = Calendar.getInstance();
         int month = calendar.get(Calendar.MONTH);
         calendar.add(Calendar.MONTH, -1);
@@ -43,23 +52,29 @@ public class WebFacade {
         query.whereGreaterThanOrEqualTo(Register.KEY_MONTH, oldMonth);
         query.whereLessThanOrEqualTo(Register.KEY_MONTH, month);
         query.whereEqualTo(Register.KEY_YEAR, year);
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> list, ParseException e) {
-                List<Register> registers = new ArrayList<Register>();
-                if (e == null) {
-                    for (ParseObject parseObject : list) {
-                        Register register = new Register();
-                        register.toObject(parseObject);
-                        registers.add(register);
+        if(countCallback == null) {
+            query.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> list, ParseException e) {
+                    List<Register> registers = new ArrayList<Register>();
+                    if (e == null) {
+                        for (ParseObject parseObject : list) {
+                            Register register = new Register();
+                            register.toObject(parseObject);
+                            registers.add(register);
+                        }
+                        queryWebCallback.onQueryResult(registers, null);
+                    } else {
+                        queryWebCallback.onQueryResult(registers, e);
                     }
-                    queryWebCallback.onQueryResult(registers, null);
-                } else {
-                    queryWebCallback.onQueryResult(registers, e);
                 }
-            }
-        });
+            });
+        } else {
+            query.countInBackground(countCallback);
+        }
     }
+
+
 
     public static void loadCondominiumByCondominiumCode(String condominiumCode, final UniqueQueryWebCallback<Condominium> uniqueQueryWebCallback) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(Condominium.class.getSimpleName());
