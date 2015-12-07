@@ -27,20 +27,24 @@ public class OwnerRead extends SyndicHandActivity {
 
     private Unity unity;
 
+    String idGas = null;
+    String idHotWater = null;
+    String idColdWater = null;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.read_screen);
 
-        unity = (Unity)getIntent().getExtras().getSerializable(Unity.class.getSimpleName());
+        unity = (Unity) getIntent().getExtras().getSerializable(Unity.class.getSimpleName());
 
         editTextCurrentColdWater = (EditText) findViewById(R.id.edit_text_cold_water);
         editTextCurrentHotWater = (EditText) findViewById(R.id.edit_text_hotwater);
         editTextCurrentGasRegister = (EditText) findViewById(R.id.edit_text_quantity_gas);
 
-        editTextCurrentGasRegisterOld =  (EditText) findViewById(R.id.edit_text_quantity_gas_old);
-        editTextCurrentColdWaterOld  = (EditText) findViewById(R.id.edit_text_cold_water_old);
-        editTextCurrentHotWaterOld  = (EditText) findViewById(R.id.edit_text_hotwater_old);
+        editTextCurrentGasRegisterOld = (EditText) findViewById(R.id.edit_text_quantity_gas_old);
+        editTextCurrentColdWaterOld = (EditText) findViewById(R.id.edit_text_cold_water_old);
+        editTextCurrentHotWaterOld = (EditText) findViewById(R.id.edit_text_hotwater_old);
 
         TextView textViewName = (TextView) findViewById(R.id.text_view_name);
         textViewName.setText(unity.getResponsableName());
@@ -59,34 +63,34 @@ public class OwnerRead extends SyndicHandActivity {
                 }
 
                 double coldWater = getDoubleValueInEditText(editTextCurrentColdWater);
-                saveRegister(coldWater, Register.REGISTER_COLD_WATER);
+                saveRegister(idColdWater,coldWater, Register.REGISTER_COLD_WATER);
             }
         });
 
         findViewById(R.id.button_save_gas).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editTextCurrentGasRegisterOld.isEnabled()) {
+                if (editTextCurrentGasRegisterOld.isEnabled()) {
                     double oldRegister = getDoubleValueInEditText(editTextCurrentGasRegisterOld);
                     saveOldRegister(oldRegister, Register.REGISTER_GAS);
                 }
 
 
                 double gas = getDoubleValueInEditText(editTextCurrentGasRegister);
-                saveRegister(gas,Register.REGISTER_GAS);
+                saveRegister(idGas,gas, Register.REGISTER_GAS);
             }
         });
 
         findViewById(R.id.button_save_hot_water).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editTextCurrentHotWaterOld.isEnabled()) {
+                if (editTextCurrentHotWaterOld.isEnabled()) {
                     double oldRegister = getDoubleValueInEditText(editTextCurrentHotWaterOld);
                     saveOldRegister(oldRegister, Register.REGISTER_HOT_WATER);
                 }
 
                 double hotWater = getDoubleValueInEditText(editTextCurrentHotWater);
-                saveRegister(hotWater,Register.REGISTER_HOT_WATER);
+                saveRegister(idHotWater, hotWater, Register.REGISTER_HOT_WATER);
             }
         });
 
@@ -96,10 +100,10 @@ public class OwnerRead extends SyndicHandActivity {
     private void loadOldRegisters() {
         showProgressDialog();
         String unityId = unity.getParseUniqueID();
-        WebFacade.loadOldRegister(unityId, new WebFacade.QueryWebCallback<Register>() {
+        WebFacade.loadRegister(unityId, new WebFacade.QueryWebCallback<Register>() {
             @Override
             public void onQueryResult(List<Register> data, Exception e) {
-                if(e == null) {
+                if (e == null) {
                     treatOldRegisters(data);
                 } else {
                     showMessageToast(getString(R.string.fail_to_retrieve_data));
@@ -111,54 +115,90 @@ public class OwnerRead extends SyndicHandActivity {
     }
 
     private void treatOldRegisters(List<Register> data) {
-        for(Register register : data) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, -1);
+        int oldMonth = calendar.get(Calendar.MONTH);
+
+        for (Register register : data) {
+
+            boolean isOldMonth = false;
+            if (register.getMonth() == oldMonth) {
+                isOldMonth = true;
+            }
+
             int type = register.getType();
             switch (type) {
                 case Register.REGISTER_COLD_WATER:
-                    loadEditText(editTextCurrentColdWaterOld, register);
+                    if (isOldMonth) {
+                        loadEditTextOld(editTextCurrentColdWaterOld, register);
+                    } else {
+                        loadEditTextNew(editTextCurrentColdWater, register);
+                        idColdWater = register.getParseUniqueID();
+                    }
                     break;
                 case Register.REGISTER_HOT_WATER:
-                    loadEditText(editTextCurrentHotWaterOld, register);
+                    if (isOldMonth) {
+                        loadEditTextOld(editTextCurrentHotWaterOld, register);
+                    } else {
+                        loadEditTextNew(editTextCurrentHotWater, register);
+                        idHotWater = register.getParseUniqueID();
+                    }
                     break;
                 case Register.REGISTER_GAS:
-                    loadEditText(editTextCurrentGasRegisterOld, register);
+                    if (isOldMonth) {
+                        loadEditTextOld(editTextCurrentGasRegisterOld, register);
+                    } else {
+                        loadEditTextNew(editTextCurrentGasRegister, register);
+                        idGas = register.getParseUniqueID();
+                    }
+
                     break;
             }
         }
     }
 
-    private void loadEditText(EditText editText, Register register) {
-        String consume = String.valueOf(register.getCurrentConsume());
-        editText.setText(consume);
-        editText.setEnabled(false);
+    private void loadEditTextOld(EditText editText, Register register) {
+        loadEditText(editText, register, false);
     }
 
-    private void saveRegister(double consume, int type) {
-        saveRegister(consume, type, new Date());
+    private void loadEditTextNew(EditText editText, Register register) {
+        loadEditText(editText, register, true);
+    }
+
+    private void loadEditText(EditText editText, Register register, boolean enable) {
+        String consume = String.valueOf(register.getCurrentConsume());
+        editText.setText(consume);
+        editText.setEnabled(enable);
+    }
+
+    private void saveRegister(String parserId, double consume, int type) {
+        saveRegister(parserId,consume, type, new Date());
     }
 
     private void saveOldRegister(double consume, int type) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
         calendar.add(Calendar.MONTH, -1);
-        saveRegister(consume, type, calendar.getTime());
+        saveRegister(null,consume, type, calendar.getTime());
     }
 
-    private void saveRegister(double consume, int type, Date date) {
+    private void saveRegister(String parserId, double consume, int type, Date date) {
         showProgressDialog();
         String idCondominium = CondominiumDAO.retrieveCondominiumIdentifier();
         String user = ParseUser.getCurrentUser().getObjectId();
         String unityId = unity.getParseUniqueID();
 
         final Register register = new Register(type, consume, date, unityId, idCondominium, user);
+        register.setParseIdentifier(parserId);
         register.save();
 
         WebFacade.saveOrUpdateData(register, new WebFacade.WebCallback() {
             @Override
             public void onWorkDone(String webID, Exception e) {
-                if(e == null) {
+                if (e == null) {
                     register.setParseIdentifier(webID);
                     register.save();
+                    showMessageToast(getString(R.string.register_save_sucess));
                 } else {
                     showMessageToast(getString(R.string.fail_save_online));
                     register.delete();

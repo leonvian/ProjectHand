@@ -29,15 +29,17 @@ public class WebFacade {
 
     }
 
-    public static void loadOldRegister(String unityID, final QueryWebCallback<Register> queryWebCallback) {
+    public static void loadRegister(String unityID, final QueryWebCallback<Register> queryWebCallback) {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MONTH, -1);
         int month = calendar.get(Calendar.MONTH);
+        calendar.add(Calendar.MONTH, -1);
+        int oldMonth = calendar.get(Calendar.MONTH);
         int year = calendar.get(Calendar.YEAR);
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery(Register.class.getSimpleName());
         query.whereEqualTo(Register.KEY_ID_UNITY, unityID);
-        query.whereEqualTo(Register.KEY_MONTH, month);
+        query.whereGreaterThanOrEqualTo(Register.KEY_MONTH, oldMonth);
+        query.whereLessThanOrEqualTo(Register.KEY_MONTH, month);
         query.whereEqualTo(Register.KEY_YEAR, year);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
