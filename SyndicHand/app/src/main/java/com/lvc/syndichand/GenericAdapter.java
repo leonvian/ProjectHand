@@ -43,10 +43,10 @@ public class GenericAdapter<T>  extends RecyclerView.Adapter<GenericAdapter.View
     }
 
     private String getFirstLetter(String target) {
-        if(target == null || target.length() < 3) {
+        if(target == null || target.length() < 2) {
             return "";
         }
-        String firstLetter = target.substring(0,2);
+        String firstLetter = target.substring(0,1);
         return firstLetter;
     }
 

@@ -273,6 +273,10 @@ public class OwnerList extends SyndicHandActivity implements OnDataSelected {
             case COMMON_AREA:
                 goToNextScreen(CommonAreaList.class);
                 break;
+
+            case BLOCK:
+                goToNextScreen(BlockList.class);
+                break;
         }
     }
 

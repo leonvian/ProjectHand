@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.lvc.syndichand.database.CondominiumDAO;
+import com.lvc.syndichand.model.Block;
 import com.lvc.syndichand.model.Unity;
 import com.lvc.syndichand.webservice.WebFacade;
 
@@ -16,11 +17,14 @@ import com.lvc.syndichand.webservice.WebFacade;
  */
 public class OwnerEntry extends SyndicHandActivity {
 
+    private static final int REQUEST_CODE_BLOCK = 12;
+
     private EditText editTextApartamentNumber;
     private EditText editTextName;
     private EditText editTextEmail;
     private EditText editTextDDD;
     private EditText editTextPhone;
+    private EditText editTextBlock;
 
     private CheckBox checkBoxRent;
     private CheckBox checkBoxPet;
@@ -34,6 +38,15 @@ public class OwnerEntry extends SyndicHandActivity {
         setContentView(R.layout.entry_owner);
 
         prepareActionBarToBack(getString(R.string.owner));
+
+        editTextBlock = (EditText) findViewById(R.id.edit_text_block);
+        editTextBlock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OwnerEntry.this, SelectedBlockList.class);
+                startActivityForResult(intent, REQUEST_CODE_BLOCK);
+            }
+        });
 
         editTextApartamentNumber = (EditText) findViewById(R.id.edit_text_apartament_number);
         editTextName = (EditText) findViewById(R.id.edit_text_name);
@@ -149,5 +162,20 @@ public class OwnerEntry extends SyndicHandActivity {
         boolean result = isObrigatoryFieldsOk(editTextApartamentNumber, editTextDDD, editTextEmail, editTextName, editTextPhone);
 
         return result;
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == REQUEST_CODE_BLOCK && resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            Block block = (Block)bundle.getSerializable(Block.class.getSimpleName());
+            String blockName = block.getName();
+            editTextBlock.setText(blockName);
+            unity.setParseIdentifierBlock(block.getParseID());
+        }
+
     }
 }

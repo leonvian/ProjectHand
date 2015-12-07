@@ -117,4 +117,9 @@
 
     <string name="confirm_your_email_to_login">Agora confirme o seu e-mail e entre no sistema.</string>
 
+    <string name="block_name">Nome do bloco</string>
+    <string name="block_entry">Cadastro de bloco</string>
+
+    <string name="fail_to_retrieve_data">Falha ao recuperar os dados da web.</string>
+
 </resources>

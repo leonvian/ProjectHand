@@ -200,7 +200,6 @@ public class Unity extends Model implements Serializable, ParseData {
         parseObject.put(AUDIT_COMMITEE_KEY, isAuditCommittee());
         parseObject.put(Condominium.CONDOMINIUM_ID_KEY, getCondominiumIdentifier());
         parseObject.put(BLOCK_ID_KEY, getParseIdentifierBlock());
-        parseObject.put(BLOCK_ID_KEY, getParseIdentifierBlock());
     }
 
     @Override
@@ -212,13 +211,13 @@ public class Unity extends Model implements Serializable, ParseData {
 
     @Override
     public void toObject(ParseObject parseObject) {
-
         parseIdentifier = parseObject.getObjectId();
         responsableName = parseObject.getString(RESPONSABLE_NAME_KEY);
         email = parseObject.getString(RESPONSABLE_EMAIL_KEY);
         apartamentNumber = parseObject.getString(APARTMENT_NUMBER_KEY);
         phone = parseObject.getString(PHONE_KEY);
         ddd = parseObject.getString(PHONE_DDD_KEY);
+
 
         pet = parseObject.getBoolean(PET_KEY);
         syndic = parseObject.getBoolean(SYNDIC_KEY);
@@ -229,7 +228,6 @@ public class Unity extends Model implements Serializable, ParseData {
         condominiumIdentifier = parseObject.getString(Condominium.CONDOMINIUM_ID_KEY);
 
         parseObject.getLong(MOBILE_ID_KEY);
-
     }
 
     @Override

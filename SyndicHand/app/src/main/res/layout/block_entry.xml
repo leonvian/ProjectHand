@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/app_bar_color"
-                 />
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -33,20 +33,13 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_marginBottom="8dp"
+                    android:layout_margin="16dp"
                     android:id="@+id/text_view_name"
                     style="@style/DefaultTextView"
-                    android:text="Leonardo Viana"
+                    android:text="@string/block_entry"
                     android:textColor="@android:color/white"
                     android:textSize="22sp" />
 
-                <TextView
-                    android:layout_marginBottom="16dp"
-                    android:id="@+id/text_view_apartament_number"
-                    style="@style/DefaultTextView"
-                    android:text="222"
-                    android:textColor="@android:color/white"
-                    android:textSize="22sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -57,25 +50,19 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <include layout="@layout/item_reads_status_owner" />
+            <android.support.design.widget.TextInputLayout
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                style="@style/TextInputLayout">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="16dp"/>
+                <EditText
+                    android:id="@+id/edit_text_block_name"
+                    style="@style/DefaultEditText"
+                    android:hint="@string/block_name"
+                    android:inputType="text"
+                    />
 
-            <include layout="@layout/item_detail_dwellers" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="16dp"/>
-
-            <include layout="@layout/item_detail_vehicle" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="16dp"/>
-
-            <include layout="@layout/item_historic" />
+            </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
     </LinearLayout>
@@ -87,8 +74,19 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="16dp"
-        android:src="@drawable/ic_create_white_24dp"
+        android:src="@drawable/ic_add_white"
         app:layout_anchor="@id/viewA" />
 
 
 </android.support.design.widget.CoordinatorLayout>
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+
+</LinearLayout>
+    -->

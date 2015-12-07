@@ -33,6 +33,7 @@
             com.lvc.syndichand.model.Dweller,
             com.lvc.syndichand.model.CommonArea,
             com.lvc.syndichand.model.Unity,
+            com.lvc.syndichand.model.Block,
             com.lvc.syndichand.model.Vehicle,
             com.lvc.syndichand.model.Register" />
 
@@ -96,6 +97,25 @@
             android:windowSoftInputMode="stateAlwaysHidden"
             android:label="@string/app_name" />
 
+        <activity
+            android:name=".SelectedBlockList"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:label="@string/app_name" />
+
+
+        <activity
+            android:name=".BlockList"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:label="@string/app_name" />
+
+
+        <activity
+            android:name=".BlockEntry"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:label="@string/app_name" />
 
 
         <!--

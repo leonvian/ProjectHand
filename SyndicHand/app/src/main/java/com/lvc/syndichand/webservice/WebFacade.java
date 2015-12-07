@@ -1,10 +1,12 @@
 package com.lvc.syndichand.webservice;
 
 import com.lvc.syndichand.database.CondominiumDAO;
+import com.lvc.syndichand.model.Block;
 import com.lvc.syndichand.model.CommonArea;
 import com.lvc.syndichand.model.Condominium;
 import com.lvc.syndichand.model.CondominiumNotCreatedYetException;
 import com.lvc.syndichand.model.ParseData;
+import com.lvc.syndichand.model.Register;
 import com.lvc.syndichand.model.Unity;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -14,6 +16,7 @@ import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -21,7 +24,38 @@ import java.util.List;
  */
 public class WebFacade {
 
-    //fxsJlXI6nj
+
+    public static void parseCloud() {
+
+    }
+
+    public static void loadOldRegister(final QueryWebCallback<Register> queryWebCallback) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, -1);
+        int month = calendar.get(Calendar.MONTH);
+        int year = calendar.get(Calendar.YEAR);
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(Register.class.getSimpleName());
+        query.whereEqualTo(Register.KEY_MONTH, month);
+        query.whereEqualTo(Register.KEY_YEAR, year);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> list, ParseException e) {
+                List<Register> registers = new ArrayList<Register>();
+                if (e == null) {
+                    for (ParseObject parseObject : list) {
+                        Register register = new Register();
+                        register.toObject(parseObject);
+                        registers.add(register);
+                    }
+                    queryWebCallback.onQueryResult(registers, null);
+                } else {
+                    queryWebCallback.onQueryResult(registers, e);
+                }
+            }
+        });
+    }
+
     public static void loadCondominiumByCondominiumCode(String condominiumCode, final UniqueQueryWebCallback<Condominium> uniqueQueryWebCallback) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(Condominium.class.getSimpleName());
         query.whereEqualTo("objectId", condominiumCode);
@@ -53,9 +87,26 @@ public class WebFacade {
                 } else {
                     queryWebCallback.onQueryResult(dataList, e);
                 }
-
             }
+        });
+    }
 
+    public static void retrieveListOfBlocks(final QueryWebCallback<Block> queryWebCallback) throws CondominiumNotCreatedYetException {
+        query(Block.class, new FindCallback<ParseObject>() {
+
+            public void done(List<ParseObject> objects, ParseException e) {
+                List<Block> dataList = new ArrayList<Block>();
+                if (e == null) {
+                    for (ParseObject parseObject : objects) {
+                        Block data = new Block();
+                        data.toObject(parseObject);
+                        dataList.add(data);
+                    }
+                    queryWebCallback.onQueryResult(dataList, null);
+                } else {
+                    queryWebCallback.onQueryResult(dataList, e);
+                }
+            }
         });
     }
 
