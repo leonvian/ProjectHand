@@ -44,6 +44,7 @@ public class OwnerList extends SyndicHandActivity implements OnDataSelected {
     private static final int COMMON_AREA = 3;
     private static final int CONSUME_ENTRY = 4;
     private static final int CONSUME_CONDOMINIUM = 5;
+    private static final int VEHICLE_ENTRY = 6;
 
     private static final int REQUEST_CODE_ATUALIZE_LIST = 10;
     private static final int REQUEST_CODE_CONDOMINIUM_INFO = 11;
@@ -264,8 +265,11 @@ public class OwnerList extends SyndicHandActivity implements OnDataSelected {
     }
 
     private void menuDrawerAction(MenuDrawerItem itemDrawer) {
+
         int itemCode = itemDrawer.getCode();
+
         switch (itemCode) {
+
             case CONDOMINIUN:
                 goToNextScreen(CondominiumEntry.class, REQUEST_CODE_CONDOMINIUM_INFO);
                 break;
@@ -277,16 +281,23 @@ public class OwnerList extends SyndicHandActivity implements OnDataSelected {
             case BLOCK:
                 goToNextScreen(BlockList.class);
                 break;
+
+            case VEHICLE_ENTRY:
+                goToNextScreen(VehicleList.class);
+                break;
         }
     }
 
     private List<MenuDrawerItem> generateListMenuDrawerItems() {
+
         List<MenuDrawerItem> itens = new ArrayList<MenuDrawerItem>();
+
         itens.add(new MenuDrawerItem(CONDOMINIUN, getString(R.string.condominium)));
         itens.add(new MenuDrawerItem(BLOCK, getString(R.string.blocks)));
         itens.add(new MenuDrawerItem(COMMON_AREA, getString(R.string.common_areas)));
         itens.add(new MenuDrawerItem(CONSUME_ENTRY, getString(R.string.consume_entry)));
         itens.add(new MenuDrawerItem(CONSUME_CONDOMINIUM, getString(R.string.consume_condominium)));
+        itens.add(new MenuDrawerItem(VEHICLE_ENTRY, getString(R.string.entry_vehicles)));
 
         return itens;
     }

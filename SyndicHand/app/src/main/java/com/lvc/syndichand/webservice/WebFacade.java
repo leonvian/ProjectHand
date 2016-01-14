@@ -8,6 +8,7 @@ import com.lvc.syndichand.model.CondominiumNotCreatedYetException;
 import com.lvc.syndichand.model.ParseData;
 import com.lvc.syndichand.model.Register;
 import com.lvc.syndichand.model.Unity;
+import com.lvc.syndichand.model.Vehicle;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -106,6 +107,31 @@ public class WebFacade {
                         dataList.add(data);
                     }
                     queryWebCallback.onQueryResult(dataList, null);
+                } else {
+                    queryWebCallback.onQueryResult(dataList, e);
+                }
+            }
+        });
+    }
+
+    public static void retrieveListOfVehicles(final QueryWebCallback<Vehicle> queryWebCallback) throws CondominiumNotCreatedYetException {
+
+        query(Vehicle.class, new FindCallback<ParseObject>() {
+
+            public void done(List<ParseObject> objects, ParseException e) {
+
+                List<Vehicle> dataList = new ArrayList<Vehicle>();
+
+                if (e == null) {
+
+                    for (ParseObject parseObject : objects) {
+                        Vehicle data = new Vehicle();
+                        data.toObject(parseObject);
+                        dataList.add(data);
+                    }
+
+                    queryWebCallback.onQueryResult(dataList, null);
+
                 } else {
                     queryWebCallback.onQueryResult(dataList, e);
                 }
