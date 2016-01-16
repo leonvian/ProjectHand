@@ -5,6 +5,7 @@ import com.lvc.syndichand.model.Block;
 import com.lvc.syndichand.model.CommonArea;
 import com.lvc.syndichand.model.Condominium;
 import com.lvc.syndichand.model.CondominiumNotCreatedYetException;
+import com.lvc.syndichand.model.NoticeBoard;
 import com.lvc.syndichand.model.ParseData;
 import com.lvc.syndichand.model.Register;
 import com.lvc.syndichand.model.Unity;
@@ -139,6 +140,31 @@ public class WebFacade {
         });
     }
 
+    public static void retrieveListOfNoticeBoards(final QueryWebCallback<NoticeBoard> queryWebCallback) throws CondominiumNotCreatedYetException {
+
+        query(NoticeBoard.class, new FindCallback<ParseObject>() {
+
+            public void done(List<ParseObject> objects, ParseException e) {
+
+                List<NoticeBoard> dataList = new ArrayList<NoticeBoard>();
+
+                if (e == null) {
+
+                    for (ParseObject parseObject : objects) {
+                        NoticeBoard data = new NoticeBoard();
+                        data.toObject(parseObject);
+                        dataList.add(data);
+                    }
+
+                    queryWebCallback.onQueryResult(dataList, null);
+
+                } else {
+                    queryWebCallback.onQueryResult(dataList, e);
+                }
+            }
+        });
+    }
+
     public static void retrieveListOfUnitys(final QueryWebCallback<Unity> queryWebCallback) throws CondominiumNotCreatedYetException {
         query(Unity.class,new FindCallback<ParseObject>() {
 
@@ -225,6 +251,4 @@ public class WebFacade {
     public interface UniqueQueryWebCallback<T> {
         public void onQueryResult(T data, Exception e);
     }
-
-
 }

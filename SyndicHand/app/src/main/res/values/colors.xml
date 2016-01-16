@@ -49,4 +49,6 @@
     <color name="defaultBackgroundColor">#fafafa</color>
     <color name="defaultTextColor">#a1a1a1</color>
 
+    <color name="listTextColor">#000000</color>
+
 </resources>

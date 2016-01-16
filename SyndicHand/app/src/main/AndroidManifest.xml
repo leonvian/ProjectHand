@@ -35,7 +35,8 @@
             com.lvc.syndichand.model.Unity,
             com.lvc.syndichand.model.Block,
             com.lvc.syndichand.model.Vehicle,
-            com.lvc.syndichand.model.Register" />
+            com.lvc.syndichand.model.Register,
+            com.lvc.syndichand.model.NoticeBoard" />
 
 
         <activity
@@ -103,13 +104,11 @@
             android:windowSoftInputMode="stateAlwaysHidden"
             android:label="@string/app_name" />
 
-
         <activity
             android:name=".BlockList"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:label="@string/app_name" />
-
 
         <activity
             android:name=".BlockEntry"
@@ -125,6 +124,18 @@
 
         <activity
             android:name=".VehicleEntry"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:label="@string/app_name" />
+
+        <activity
+            android:name=".NoticeBoardList"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:label="@string/app_name" />
+
+        <activity
+            android:name=".NoticeBoardEntry"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:label="@string/app_name" />

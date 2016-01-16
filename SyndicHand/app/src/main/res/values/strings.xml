@@ -130,4 +130,9 @@
     <string name="vehicle_unity">Unidade</string>
     <string name="vehicle_save_sucesss">Veículo salvo com sucesso.</string>
 
+    <string name="notice_board">Quadro de Avisos</string>
+    <string name="notice_board_message">Mensagem</string>
+    <string name="notice_board_title">Título</string>
+    <string name="notice_board_save_sucesss">Aviso salvo com sucesso.</string>
+
 </resources>

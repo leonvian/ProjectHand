@@ -45,6 +45,7 @@ public class OwnerList extends SyndicHandActivity implements OnDataSelected {
     private static final int CONSUME_ENTRY = 4;
     private static final int CONSUME_CONDOMINIUM = 5;
     private static final int VEHICLE_ENTRY = 6;
+    private static final int NOTICE_BOARD_ENTRY = 7;
 
     private static final int REQUEST_CODE_ATUALIZE_LIST = 10;
     private static final int REQUEST_CODE_CONDOMINIUM_INFO = 11;
@@ -285,6 +286,10 @@ public class OwnerList extends SyndicHandActivity implements OnDataSelected {
             case VEHICLE_ENTRY:
                 goToNextScreen(VehicleList.class);
                 break;
+
+            case NOTICE_BOARD_ENTRY:
+                goToNextScreen(NoticeBoardList.class);
+                break;
         }
     }
 
@@ -298,6 +303,7 @@ public class OwnerList extends SyndicHandActivity implements OnDataSelected {
         itens.add(new MenuDrawerItem(CONSUME_ENTRY, getString(R.string.consume_entry)));
         itens.add(new MenuDrawerItem(CONSUME_CONDOMINIUM, getString(R.string.consume_condominium)));
         itens.add(new MenuDrawerItem(VEHICLE_ENTRY, getString(R.string.entry_vehicles)));
+        itens.add(new MenuDrawerItem(NOTICE_BOARD_ENTRY, getString(R.string.notice_board)));
 
         return itens;
     }

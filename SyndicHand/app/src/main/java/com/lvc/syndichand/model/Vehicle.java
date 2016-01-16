@@ -149,7 +149,6 @@ public class Vehicle extends Model implements ParseData, Serializable {
         Vehicle that = (Vehicle) o;
 
         return parseIdentifier.equals(that.parseIdentifier);
-
     }
 
     @Override
