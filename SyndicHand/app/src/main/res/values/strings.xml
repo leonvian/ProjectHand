@@ -31,6 +31,7 @@
     <string name="this_field_is_obrigatory">Este campo é obrigatório</string>
     <string name="unexpected_value">Campo preenchido com valor inadequado.</string>
     <string name="read_title">Leituras</string>
+    <string name="read">Leitura</string>
     <string name="ok">Ok</string>
     <string name="owner_created_want_make_first_read">Condômino recém criado. Deseja realizar a primeira leitura?</string>
 
@@ -135,4 +136,36 @@
     <string name="notice_board_title">Título</string>
     <string name="notice_board_save_sucesss">Aviso salvo com sucesso.</string>
 
+    <string name="syndic_entry">Cadastro de Síndico</string>
+    <string name="new_user_tip">* Abra a mensagem de confirmação que enviamos para o e-mail cadastrado para prosseguir.</string>
+
+
+    <string name="jan">Janeiro</string>
+    <string name="feb">Fevereiro</string>
+    <string name="marc">Março</string>
+    <string name="april">Abril</string>
+    <string name="may">Maio</string>
+    <string name="jun">Junho</string>
+    <string name="july">Julho</string>
+    <string name="august">Agosto</string>
+    <string name="september">Setembro</string>
+    <string name="october">Outubro</string>
+    <string name="november">Novembro</string>
+    <string name="december">Dezembro</string>
+
+    <string name="process_consume_register">Processar Consumo</string>
+    <string name="user_or_password_invalid">Usuário ou senha inválido.</string>
+    <string name="registers_to_be_processed">Registros para serem processados.</string>
+
+
+    <string name="cancel">Cancelar</string>
+    <string name="confirm_send_reads">Confirma o envio de leituras? Você não poderá mais edita-las no futuro.</string>
+
+    <string name="registers_processed_sucess">Registros processados com sucesso.</string>
+    <string name="fail_to_process_register_on_web">Falha ao processar registros na web. Verifique a sua conexão e tente novamente.</string>
+    <string name="fail_to_process_intern">Ocorreu uma falha desconhecida no processo de registro.</string>
+
+    <string name="no_register_found">Não encontramos nenhum registro para ser processado.</string>
+
 </resources>
+

@@ -16,6 +16,9 @@ public class Register extends Model implements Serializable, ParseData {
     public static final int REGISTER_GAS = 2;
     public static final int REGISTER_HOT_WATER = 3;
 
+    public static final int STATUS_WAITING_PROCESS = 1;
+    public static final int STATUS_PROCESSED = 2;
+
 
     public static final String KEY_USER = "UserId"; // O síndico que cadastrou esse registro
     public static final String KEY_MOBILE_ID = "MobileID";
@@ -27,6 +30,7 @@ public class Register extends Model implements Serializable, ParseData {
     public static final String KEY_DAY = "Day";
     public static final String KEY_MONTH = "Month";
     public static final String KEY_YEAR = "Year";
+    public static final String KEY_STATUS = "Status";
 
     @Column
     private String parseIdentifier;
@@ -62,6 +66,10 @@ public class Register extends Model implements Serializable, ParseData {
     private int year;
 
 
+    @Column(name = "Status")
+    private int status;
+
+
     public Register() {
     }
 
@@ -73,11 +81,20 @@ public class Register extends Model implements Serializable, ParseData {
         this.idCondominium = idCondominium;
         this.idUser = user;
 
+        status = STATUS_WAITING_PROCESS;
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         month = calendar.get(Calendar.MONTH);
         year = calendar.get(Calendar.YEAR);
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getIdBlock() {
@@ -185,6 +202,7 @@ public class Register extends Model implements Serializable, ParseData {
         date = parseObject.getDate(KEY_DATE);
         currentConsume = parseObject.getDouble(KEY_CURRENT_CONSUME);
         type = parseObject.getInt(KEY_TYPE);
+        status = parseObject.getInt(KEY_STATUS);
     }
 
     @Override
@@ -203,6 +221,7 @@ public class Register extends Model implements Serializable, ParseData {
         parseObject.put(KEY_DAY, getDay());
         parseObject.put(KEY_MONTH, getMonth());
         parseObject.put(KEY_YEAR, getYear());
+        parseObject.put(KEY_STATUS, getStatus());
         parseObject.put(Condominium.CONDOMINIUM_ID_KEY, getIdCondominium());
     }
 
@@ -214,5 +233,26 @@ public class Register extends Model implements Serializable, ParseData {
     }
 
 
+    public boolean isNotProcessing() {
+        if(status == STATUS_WAITING_PROCESS) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public boolean isLastMonth() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, -1);
+        int oldMonth = calendar.get(Calendar.MONTH);
+
+        boolean isOldMonth = false;
+        if (getMonth() == oldMonth) {
+            isOldMonth = true;
+        }
+
+        return isOldMonth;
+    }
 
 }

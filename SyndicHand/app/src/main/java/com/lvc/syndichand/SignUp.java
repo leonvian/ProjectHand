@@ -12,6 +12,8 @@ import com.parse.SignUpCallback;
 
 public class SignUp extends SyndicHandActivity {
 
+    public static final String USER_NAME = "USER_NAME";
+
     private EditText editTextUserName;
     private EditText editTextName;
     private EditText editTextEmail;
@@ -56,11 +58,18 @@ public class SignUp extends SyndicHandActivity {
     }
 
     private void signUp(ParseUser user) {
+        showProgressDialog();
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
-                    goToNextScreen(LoggingIn.class);
+                    dismissProgressDialog();
+                    Bundle bundle = new Bundle();
+                    String login = editTextUserName.getText().toString();
+                    bundle.putString(USER_NAME,login);
+                    goToNextScreen(LoggingIn.class,bundle);
+                    finish();
                 } else {
+                    dismissProgressDialog();
                     e.printStackTrace();
                     showMessageToast(getString(R.string.fail_to_entry_user));
                 }

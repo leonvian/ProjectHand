@@ -122,7 +122,6 @@ public class CondominiumEntry extends SyndicHandActivity {
                     condominium.save();
                     saveUserWithcCondominiumID(webId);
 
-                    dismissProgressDialog();
                 } else {
                     condominium.delete();
 
@@ -141,9 +140,12 @@ public class CondominiumEntry extends SyndicHandActivity {
             @Override
             public void done(ParseException e) {
                 if(e == null) {
+                    dismissProgressDialog();
                     Toast.makeText(CondominiumEntry.this, R.string.save_sucess, Toast.LENGTH_LONG).show();
+                    setResult(RESULT_OK);
                     finish();
                 } else {
+                    dismissProgressDialog();
                     condominium.delete();
                     Toast.makeText(CondominiumEntry.this, R.string.fail_save_online, Toast.LENGTH_LONG).show();
                 }

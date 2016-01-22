@@ -1,6 +1,7 @@
 package com.lvc.syndichand;
 
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,10 +28,6 @@ public class OwnerRead extends SyndicHandActivity {
 
     private Unity unity;
 
-    String idGas = null;
-    String idHotWater = null;
-    String idColdWater = null;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,46 +52,64 @@ public class OwnerRead extends SyndicHandActivity {
         prepareActionBarToBack(getString(R.string.read_title));
 
         findViewById(R.id.button_save_cold_water).setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                if (editTextCurrentColdWaterOld.isEnabled()) {
-                    double oldRegister = getDoubleValueInEditText(editTextCurrentColdWaterOld);
-                    saveOldRegister(oldRegister, Register.REGISTER_COLD_WATER);
-                }
-
-                double coldWater = getDoubleValueInEditText(editTextCurrentColdWater);
-                saveRegister(idColdWater,coldWater, Register.REGISTER_COLD_WATER);
+                saveRegisterIfNecessary(editTextCurrentColdWaterOld, Register.REGISTER_COLD_WATER, true);
+                saveRegisterIfNecessary(editTextCurrentColdWater, Register.REGISTER_COLD_WATER, false);
             }
         });
 
         findViewById(R.id.button_save_gas).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (editTextCurrentGasRegisterOld.isEnabled()) {
-                    double oldRegister = getDoubleValueInEditText(editTextCurrentGasRegisterOld);
-                    saveOldRegister(oldRegister, Register.REGISTER_GAS);
-                }
-
-
-                double gas = getDoubleValueInEditText(editTextCurrentGasRegister);
-                saveRegister(idGas,gas, Register.REGISTER_GAS);
+                saveRegisterIfNecessary(editTextCurrentGasRegisterOld, Register.REGISTER_GAS, true);
+                saveRegisterIfNecessary(editTextCurrentGasRegister, Register.REGISTER_GAS, false);
             }
         });
 
         findViewById(R.id.button_save_hot_water).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (editTextCurrentHotWaterOld.isEnabled()) {
-                    double oldRegister = getDoubleValueInEditText(editTextCurrentHotWaterOld);
-                    saveOldRegister(oldRegister, Register.REGISTER_HOT_WATER);
-                }
-
-                double hotWater = getDoubleValueInEditText(editTextCurrentHotWater);
-                saveRegister(idHotWater, hotWater, Register.REGISTER_HOT_WATER);
+                saveRegisterIfNecessary(editTextCurrentHotWaterOld, Register.REGISTER_HOT_WATER, true);
+                saveRegisterIfNecessary(editTextCurrentHotWater, Register.REGISTER_HOT_WATER, false);
             }
         });
 
         loadOldRegisters();
+        atualizeLabel();
+    }
+
+    private void saveRegisterIfNecessary(EditText editText, int registerCode, boolean isOld) {
+        if (editText.isEnabled()) {
+            double consume = getDoubleValueInEditText(editText);
+            if(isOld) {
+                saveOldRegister(consume, registerCode);
+            } else {
+                saveRegister(consume, registerCode);
+            }
+        }
+    }
+
+    private void atualizeLabel() {
+        Calendar calendar = Calendar.getInstance();
+        int currentMonth = calendar.get(Calendar.MONTH);
+        int year = calendar.get(Calendar.YEAR);
+        setHint(editTextCurrentColdWater,getStringMonth(currentMonth,year));
+        setHint(editTextCurrentHotWater,getStringMonth(currentMonth,year));
+        setHint(editTextCurrentGasRegister, getStringMonth(currentMonth, year));
+
+        calendar.add(Calendar.MONTH, -1);
+        currentMonth = calendar.get(Calendar.MONTH);
+        year = calendar.get(Calendar.YEAR);
+        setHint(editTextCurrentGasRegisterOld,getStringMonth(currentMonth,year));
+        setHint(editTextCurrentColdWaterOld,getStringMonth(currentMonth,year));
+        setHint(editTextCurrentHotWaterOld, getStringMonth(currentMonth, year));
+    }
+
+    private void setHint(EditText editText, String text) {
+        TextInputLayout textInputLayout = (TextInputLayout)editText.getParent();
+        textInputLayout.setHint(text);
     }
 
     private void loadOldRegisters() {
@@ -115,54 +130,49 @@ public class OwnerRead extends SyndicHandActivity {
     }
 
     private void treatOldRegisters(List<Register> data) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MONTH, -1);
-        int oldMonth = calendar.get(Calendar.MONTH);
 
         for (Register register : data) {
-
-            boolean isOldMonth = false;
-            if (register.getMonth() == oldMonth) {
-                isOldMonth = true;
-            }
-
             int type = register.getType();
             switch (type) {
                 case Register.REGISTER_COLD_WATER:
-                    if (isOldMonth) {
-                        loadEditTextOld(editTextCurrentColdWaterOld, register);
-                    } else {
-                        loadEditTextNew(editTextCurrentColdWater, register);
-                        idColdWater = register.getParseUniqueID();
-                    }
+                    loadEditTextColdWater(register);
                     break;
                 case Register.REGISTER_HOT_WATER:
-                    if (isOldMonth) {
-                        loadEditTextOld(editTextCurrentHotWaterOld, register);
-                    } else {
-                        loadEditTextNew(editTextCurrentHotWater, register);
-                        idHotWater = register.getParseUniqueID();
-                    }
+                   loadEditTextHotWater(register);
                     break;
                 case Register.REGISTER_GAS:
-                    if (isOldMonth) {
-                        loadEditTextOld(editTextCurrentGasRegisterOld, register);
-                    } else {
-                        loadEditTextNew(editTextCurrentGasRegister, register);
-                        idGas = register.getParseUniqueID();
-                    }
-
+                    loadEditTextGas(register);
                     break;
             }
         }
     }
 
-    private void loadEditTextOld(EditText editText, Register register) {
-        loadEditText(editText, register, false);
+    private void loadEditTextHotWater(Register register) {
+        if (register.isLastMonth()) {
+            loadEditText(editTextCurrentHotWaterOld, register);
+        } else {
+            loadEditText(editTextCurrentHotWater, register);
+        }
     }
 
-    private void loadEditTextNew(EditText editText, Register register) {
-        loadEditText(editText, register, true);
+    private void loadEditTextColdWater(Register register) {
+        if (register.isLastMonth()) {
+            loadEditText(editTextCurrentColdWaterOld, register);
+        } else {
+            loadEditText(editTextCurrentColdWater, register);
+        }
+    }
+
+    private void loadEditTextGas(Register register) {
+        if (register.isLastMonth()) {
+            loadEditText(editTextCurrentGasRegisterOld, register);
+        } else {
+            loadEditText(editTextCurrentGasRegister, register);
+        }
+    }
+
+    private void loadEditText(EditText editText, Register register) {
+        loadEditText(editText, register, register.isNotProcessing());
     }
 
     private void loadEditText(EditText editText, Register register, boolean enable) {
@@ -171,28 +181,33 @@ public class OwnerRead extends SyndicHandActivity {
         editText.setEnabled(enable);
     }
 
-    private void saveRegister(String parserId, double consume, int type) {
-        saveRegister(parserId,consume, type, new Date());
+    private void saveRegister(double consume, int type) {
+        saveRegister(consume, type, new Date());
     }
 
     private void saveOldRegister(double consume, int type) {
+        Date date = generateLastMonthDate();
+        saveRegister(consume, type, date);
+    }
+
+    private Date generateLastMonthDate() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
         calendar.add(Calendar.MONTH, -1);
-        saveRegister(null,consume, type, calendar.getTime());
+        Date date = calendar.getTime();
+        return date;
     }
 
-    private void saveRegister(String parserId, double consume, int type, Date date) {
+    private void saveRegister(double consume, int type, Date date) {
         showProgressDialog();
         String idCondominium = CondominiumDAO.retrieveCondominiumIdentifier();
         String user = ParseUser.getCurrentUser().getObjectId();
         String unityId = unity.getParseUniqueID();
 
         final Register register = new Register(type, consume, date, unityId, idCondominium, user);
-        register.setParseIdentifier(parserId);
         register.save();
 
-        WebFacade.saveOrUpdateData(register, new WebFacade.WebCallback() {
+        WebFacade.saveOrUpdateRegister(register, new WebFacade.WebCallback() {
             @Override
             public void onWorkDone(String webID, Exception e) {
                 if (e == null) {
@@ -251,6 +266,43 @@ public class OwnerRead extends SyndicHandActivity {
 
     private void loadOldConsume() {
 
+    }
+
+    private String getStringMonth(int month, int year) {
+        String monthStr = getMonth(month);
+        String result = getString(R.string.read).concat(" ").concat(monthStr).concat(" ").concat(String.valueOf(year));
+        return result;
+    }
+
+
+    private String getMonth(int month) {
+        switch (month) {
+            case Calendar.JANUARY:
+                return getString(R.string.jan);
+            case Calendar.FEBRUARY:
+                return getString(R.string.feb);
+            case Calendar.MARCH:
+                return getString(R.string.marc);
+            case Calendar.MAY:
+                return getString(R.string.may);
+            case Calendar.JUNE:
+                return getString(R.string.jun);
+            case Calendar.JULY:
+                return getString(R.string.july);
+            case Calendar.AUGUST:
+                return getString(R.string.august);
+            case Calendar.SEPTEMBER:
+                return getString(R.string.september);
+            case Calendar.OCTOBER:
+                return getString(R.string.october);
+            case Calendar.NOVEMBER:
+                return getString(R.string.november);
+            case Calendar.APRIL:
+                return getString(R.string.april);
+            case Calendar.DECEMBER:
+                return getString(R.string.december);
+        }
+        return "";
     }
 
 }

@@ -79,6 +79,14 @@
 
                 </android.support.design.widget.TextInputLayout>
 
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/text_view_new_user_tip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="2dp"
+                    android:text="@string/new_user_tip"/>
+
                 <Button
                     android:id="@+id/button_signup"
                     android:layout_marginTop="@dimen/activity_horizontal_margin"

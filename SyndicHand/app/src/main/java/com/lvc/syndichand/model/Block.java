@@ -76,4 +76,25 @@ public class Block extends Model implements ParseData, Serializable {
     public String toString() {
         return name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Block block = (Block) o;
+
+        if(parseID != null) {
+            return parseID.equals(block.getParseID());
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (parseID != null ? parseID.hashCode() : 0);
+        return result;
+    }
 }

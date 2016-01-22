@@ -10,11 +10,12 @@ import com.parse.ParseUser;
 
 public class LoggingIn extends SyndicHandActivity {
 
-
     private static final String NAME_KEY = "NAME_KEY";
     private static final String PASSWORD_KEY = "PASSWORD_KEY";
 
     private static final String CONFIRMED_EMAIL_KEY = "emailVerified";
+    private static final int INVALID_USER_OR_PASSWORD = 101;
+
 
     private EditText editTextName;
     private EditText editTextPassword;
@@ -47,17 +48,23 @@ public class LoggingIn extends SyndicHandActivity {
                 bundle.putString(NAME_KEY, name);
                 bundle.putString(PASSWORD_KEY, password);
                 goToNextScreen(SignUp.class, bundle);
+                finish();
             }
         });
 
+        loadUser();
+    }
 
+    private void loadUser() {
         ParseUser parseUser = ParseUser.getCurrentUser();
         if(parseUser != null) {
             if(isEmailVerified(parseUser)) {
                 goToNextScreen(OwnerList.class);
                 finish();
             } else {
-                showMessageToast(getString(R.string.confirm_your_email_to_login));
+                String userName = parseUser.getUsername();
+                editTextName.setText(userName);
+                findViewById(R.id.text_view_new_user_tip).setVisibility(View.VISIBLE);
             }
         }
     }
@@ -70,13 +77,23 @@ public class LoggingIn extends SyndicHandActivity {
                 if (e == null) {
                     treatAutenticationResponse(user);
                 } else {
+                    int code = e.getCode();
+                    treatError(code);
                     e.printStackTrace();
-                    showMessageToast(getString(R.string.fail_to_login_check_your_connection_and_try_again));
                 }
 
             }
         });
     }
+
+    private void treatError(int errorCode) {
+        if(errorCode == INVALID_USER_OR_PASSWORD) {
+            showMessageToast(getString(R.string.user_or_password_invalid));
+        } else {
+            showMessageToast(getString(R.string.fail_to_login_check_your_connection_and_try_again));
+        }
+    }
+
 
     private void treatAutenticationResponse(ParseUser user) {
         if (user != null) {

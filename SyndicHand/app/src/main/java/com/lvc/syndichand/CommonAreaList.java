@@ -52,7 +52,6 @@ public class CommonAreaList extends SyndicHandList implements OnDataSelected {
         });
     }
 
-
     @Override
     public void onDataSelected(View view, int position) {
         CommonArea commonArea = commonAreas.get(position);
@@ -76,10 +75,8 @@ public class CommonAreaList extends SyndicHandList implements OnDataSelected {
                 adapter.notifyItemInserted(0);
             }
 
-
             adapter.notifyDataSetChanged();
         }
     }
-
 
 }

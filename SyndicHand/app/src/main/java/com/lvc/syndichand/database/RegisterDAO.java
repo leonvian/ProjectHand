@@ -7,12 +7,21 @@ import com.lvc.syndichand.model.Register;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by administrator on 10/12/15.
  */
 public class RegisterDAO {
 
+
+    public static List<Register> retrieveAllNotProcessed() {
+        Select select = new Select();
+        From from = select.from(Register.class);
+        from.where("Status '"+ Register.STATUS_WAITING_PROCESS);
+        List<Register> registers = from.execute();
+        return registers;
+    }
 
     public static boolean isAllRegistersOk(long idOwner) {
         String nextDate = getDateNextMonth();

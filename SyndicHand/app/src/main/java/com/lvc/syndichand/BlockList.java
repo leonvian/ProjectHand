@@ -60,7 +60,7 @@ public class BlockList extends SyndicHandList implements  OnDataSelected {
 
         Bundle bundle = new Bundle();
         bundle.putSerializable(Block.class.getSimpleName(), block);
-        goToNextScreen(BlockEntry.class, bundle);
+        goToNextScreen(BlockEntry.class, bundle, RELOAD_LIST_CODE);
 
     }
 
@@ -68,7 +68,16 @@ public class BlockList extends SyndicHandList implements  OnDataSelected {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == RELOAD_LIST_CODE && resultCode == RESULT_OK) {
-            loadList();
+            Bundle extras = data.getExtras();
+            Block block = (Block)extras.get(Block.class.getSimpleName());
+            if(blocks.contains(block)) {
+                int indexOf = blocks.indexOf(block);
+                blocks.set(indexOf, block);
+            } else {
+                blocks.add(block);
+            }
+
+            adapter.notifyDataSetChanged();
         }
     }
 }

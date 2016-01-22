@@ -1,5 +1,6 @@
 package com.lvc.syndichand;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -49,6 +50,11 @@ public class BlockEntry extends SyndicHandActivity {
                     block.save();
 
                     dismissProgressDialog();
+                    Intent intent = new Intent();
+                    Bundle extras = new Bundle();
+                    extras.putSerializable(Block.class.getSimpleName(), block);
+                    intent.putExtras(extras);
+                    setResult(RESULT_OK, intent);
                     finish();
                 } else {
                     block.delete();

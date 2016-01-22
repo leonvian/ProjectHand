@@ -92,7 +92,7 @@ public class SyndicHandActivity extends AppCompatActivity {
 
     protected void goToNextScreen(Class<? extends Activity> target, int requestCode) {
         Intent intent = new Intent(this,target);
-        startActivityForResult(intent,requestCode);
+        startActivityForResult(intent, requestCode);
     }
 
     protected void goToNextScreen(Class<? extends Activity> target) {
@@ -104,5 +104,11 @@ public class SyndicHandActivity extends AppCompatActivity {
         Intent intent = new Intent(this,target);
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    protected void goToNextScreen(Class<? extends Activity> target, Bundle bundle, int requestCode) {
+        Intent intent = new Intent(this,target);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, requestCode);
     }
 }

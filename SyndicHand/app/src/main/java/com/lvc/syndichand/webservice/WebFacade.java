@@ -20,6 +20,7 @@ import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,16 +43,21 @@ public class WebFacade {
 
     private static void loadRegister(String unityID, final QueryWebCallback<Register> queryWebCallback, CountCallback countCallback) {
         Calendar calendar = Calendar.getInstance();
-        int month = calendar.get(Calendar.MONTH);
+        calendar.set(Calendar.DAY_OF_MONTH,30);
+        Date now = calendar.getTime();
+
         calendar.add(Calendar.MONTH, -1);
-        int oldMonth = calendar.get(Calendar.MONTH);
-        int year = calendar.get(Calendar.YEAR);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        Date old = calendar.getTime();
+
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery(Register.class.getSimpleName());
         query.whereEqualTo(Register.KEY_ID_UNITY, unityID);
-        query.whereGreaterThanOrEqualTo(Register.KEY_MONTH, oldMonth);
-        query.whereLessThanOrEqualTo(Register.KEY_MONTH, month);
-        query.whereEqualTo(Register.KEY_YEAR, year);
+
+        query.whereGreaterThanOrEqualTo(Register.KEY_DATE, old);
+        query.whereLessThanOrEqualTo(Register.KEY_DATE, now);
+
+
         if(countCallback == null) {
             query.findInBackground(new FindCallback<ParseObject>() {
                 @Override
@@ -110,6 +116,8 @@ public class WebFacade {
             }
         });
     }
+
+
 
     public static void retrieveListOfBlocks(final QueryWebCallback<Block> queryWebCallback) throws CondominiumNotCreatedYetException {
         query(Block.class, new FindCallback<ParseObject>() {
@@ -201,10 +209,37 @@ public class WebFacade {
         });
     }
 
-    private static void query(Class<? extends ParseData> classData, final FindCallback<ParseObject> findCallback) throws CondominiumNotCreatedYetException {
+
+    public static void retrieveListOfRegisterNotProcessed(final QueryWebCallback<Register> queryWebCallback) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(Register.class.getSimpleName());
         String condominiumIdentifier = retrieveCondominiumOrThrowException();
 
+        query.whereEqualTo(Condominium.CONDOMINIUM_ID_KEY, condominiumIdentifier);
+        query.whereEqualTo(Register.KEY_STATUS, Register.STATUS_WAITING_PROCESS);
+        query.findInBackground(new FindCallback<ParseObject>() {
+
+            public void done(List<ParseObject> objects, ParseException e) {
+                List<Register> registers = new ArrayList<Register>();
+                if (e == null) {
+                    for (ParseObject parseObject : objects) {
+                        Register register = new Register();
+                        register.toObject(parseObject);
+                        registers.add(register);
+                    }
+                    queryWebCallback.onQueryResult(registers, null);
+                } else {
+                    queryWebCallback.onQueryResult(registers, e);
+                }
+
+            }
+
+        });
+    }
+
+    private static void query(Class<? extends ParseData> classData, final FindCallback<ParseObject> findCallback) throws CondominiumNotCreatedYetException {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(classData.getSimpleName());
+        String condominiumIdentifier = retrieveCondominiumOrThrowException();
+
         query.whereEqualTo(Condominium.CONDOMINIUM_ID_KEY, condominiumIdentifier);
         query.findInBackground(findCallback);
     }
@@ -217,6 +252,31 @@ public class WebFacade {
 
         return condominiumIdentifier;
     }
+
+    public static void saveOrUpdateRegister(final Register parseData, final WebCallback webCallback) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(Register.class.getSimpleName());
+
+        String condominiumIdentifier = retrieveCondominiumOrThrowException();
+        query.whereEqualTo(Condominium.CONDOMINIUM_ID_KEY, condominiumIdentifier);
+        query.whereEqualTo(Register.KEY_MONTH, parseData.getMonth());
+        query.whereEqualTo(Register.KEY_YEAR, parseData.getYear());
+        query.whereEqualTo(Register.KEY_TYPE, parseData.getType());
+
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject parseObject, ParseException e) {
+                if(parseObject == null) {
+                    ParseObject newParseObject = parseData.toParseObject();
+                    saveParseObject(newParseObject, webCallback);
+                } else {
+                    parseData.updateParseObject(parseObject);
+                    saveParseObject(parseObject, webCallback);
+                }
+
+            }
+        });
+    }
+
 
     public static void saveOrUpdateData(ParseData parseData, final WebCallback webCallback) {
         ParseObject parseObject = parseData.toParseObject();
