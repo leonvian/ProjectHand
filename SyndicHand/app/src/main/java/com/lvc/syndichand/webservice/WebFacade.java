@@ -258,6 +258,7 @@ public class WebFacade {
 
         String condominiumIdentifier = retrieveCondominiumOrThrowException();
         query.whereEqualTo(Condominium.CONDOMINIUM_ID_KEY, condominiumIdentifier);
+        query.whereEqualTo(Register.KEY_ID_UNITY, parseData.getIdUnity());
         query.whereEqualTo(Register.KEY_MONTH, parseData.getMonth());
         query.whereEqualTo(Register.KEY_YEAR, parseData.getYear());
         query.whereEqualTo(Register.KEY_TYPE, parseData.getType());

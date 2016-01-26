@@ -81,7 +81,7 @@ public class OwnerRead extends SyndicHandActivity {
     }
 
     private void saveRegisterIfNecessary(EditText editText, int registerCode, boolean isOld) {
-        if (editText.isEnabled()) {
+        if (editText.isEnabled() && editText.getText().toString().length() > 0) {
             double consume = getDoubleValueInEditText(editText);
             if(isOld) {
                 saveOldRegister(consume, registerCode);
@@ -248,6 +248,7 @@ public class OwnerRead extends SyndicHandActivity {
         return valueInDouble;
     }
 
+    /*
     private boolean checkIfDoubleValueIsProperlyFilled(EditText... fields) {
         boolean result = false;
         for (EditText editText : fields) {
@@ -267,6 +268,7 @@ public class OwnerRead extends SyndicHandActivity {
     private void loadOldConsume() {
 
     }
+    */
 
     private String getStringMonth(int month, int year) {
         String monthStr = getMonth(month);

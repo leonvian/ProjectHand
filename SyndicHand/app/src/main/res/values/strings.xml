@@ -167,5 +167,7 @@
 
     <string name="no_register_found">Não encontramos nenhum registro para ser processado.</string>
 
+    <string name="validations">Validações</string>
+
 </resources>
 

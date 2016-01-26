@@ -27,6 +27,8 @@ public class NoticeBoardList extends SyndicHandList implements OnDataSelected {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(NoticeBoardList.this));
 
+        showProgressDialog();
+
         WebFacade.retrieveListOfNoticeBoards(new WebFacade.QueryWebCallback<NoticeBoard>() {
 
             @Override
@@ -38,6 +40,7 @@ public class NoticeBoardList extends SyndicHandList implements OnDataSelected {
                     noticeBoards.addAll(NoticeBoardDAO.retrieveAll());
                 }
 
+                dismissProgressDialog();
                 adapter.notifyDataSetChanged();
             }
         });

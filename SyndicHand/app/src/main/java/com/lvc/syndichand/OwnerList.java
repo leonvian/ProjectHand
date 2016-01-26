@@ -49,6 +49,7 @@ public class OwnerList extends SyndicHandActivity implements OnDataSelected {
     private static final int NOTICE_BOARD_ENTRY = 7;
 
     private static final int PROCESS_CONSUME = 8;
+    private static final int VALIDATIONS = 9;
 
 
     private static final int REQUEST_CODE_ATUALIZE_LIST = 10;
@@ -131,7 +132,7 @@ public class OwnerList extends SyndicHandActivity implements OnDataSelected {
 
             @Override
             public void onClick(View v) {
-                fabAction();
+                goToCreateOwner();
             }
         });
 
@@ -139,7 +140,7 @@ public class OwnerList extends SyndicHandActivity implements OnDataSelected {
 
             @Override
             public void onClick(View v) {
-              fabAction();
+                goToCreateOwner();
             }
         });
 
@@ -208,7 +209,7 @@ public class OwnerList extends SyndicHandActivity implements OnDataSelected {
 
     }
 
-    private void fabAction() {
+    private void goToCreateOwner() {
         Intent intent = new Intent(OwnerList.this, OwnerEntry.class);
         startActivityForResult(intent, REQUEST_CODE_ATUALIZE_LIST);
     }
@@ -293,9 +294,14 @@ public class OwnerList extends SyndicHandActivity implements OnDataSelected {
 
             case NOTICE_BOARD_ENTRY:
                 goToNextScreen(NoticeBoardList.class);
+                break;
 
             case PROCESS_CONSUME:
                 goToNextScreen(ProcessReads.class);
+                break;
+
+            case VALIDATIONS:
+                // Vai para a tela de validações onde o sindico vai validar novos usuários e
                 break;
         }
     }
@@ -313,6 +319,7 @@ public class OwnerList extends SyndicHandActivity implements OnDataSelected {
         //itens.add(new MenuDrawerItem(CONSUME_ENTRY, getString(R.string.consume_entry)));
         //itens.add(new MenuDrawerItem(CONSUME_CONDOMINIUM, getString(R.string.consume_condominium)));
         itens.add(new MenuDrawerItem(PROCESS_CONSUME, getString(R.string.process_consume_register)));
+        itens.add(new MenuDrawerItem(VALIDATIONS, getString(R.string.validations)));
 
         return itens;
     }
