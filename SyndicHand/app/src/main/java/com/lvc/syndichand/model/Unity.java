@@ -231,13 +231,17 @@ public class Unity extends Model implements Serializable, ParseData {
     }
 
     @Override
+    public String toString() {
+        return responsableName + " " + apartamentNumber;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+
 
         Unity unity = (Unity) o;
-
         return !(parseIdentifier != null ? !parseIdentifier.equals(unity.parseIdentifier) : unity.parseIdentifier != null);
 
     }

@@ -1,45 +1,128 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
-    android:layout_margin="8dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:layout_margin="8dp"
     card_view:cardBackgroundColor="@color/card_background"
     card_view:cardCornerRadius="4dp">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_vertical_margin"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="150dp"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:id="@+id/text_view_register_type"
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Leonardo Casasanta"
-            android:textSize="22sp" />
+            android:layout_margin="@dimen/activity_horizontal_margin">
+
+            <TextView
+                android:id="@+id/text_view_unity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Leonardo Casasanta"
+                android:textColor="@android:color/black"
+                android:textSize="22sp" />
+
+            <TextView
+                android:layout_marginTop="4dp"
+                android:id="@+id/text_view_unity_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="200"
+                android:textSize="18sp" />
+        </LinearLayout>
 
         <TextView
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:text="202"
-            android:id="@+id/text_view_register_value"
+            android:id="@+id/text_view_registers"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="jan/2016"
             android:textSize="16sp" />
 
+        <!--
         <TextView
-            android:layout_margin="@dimen/activity_horizontal_margin"
-            android:text="202"
             android:id="@+id/text_view_register_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:text="jan/2016"
+            android:textSize="22sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cold_water"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/text_view_register_cold_water"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="22"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hot_water"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/text_view_register_hot_water"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="20"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gas"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/text_view_register_gas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="35"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+ -->
 
     </LinearLayout>
 
